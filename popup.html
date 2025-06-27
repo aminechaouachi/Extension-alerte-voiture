@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 350px;
+            padding: 20px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 18px;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 13px;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.5);
+        }
+        
+        .price-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .price-group > div {
+            flex: 1;
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #218838;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            text-align: center;
+        }
+        
+        .status.active {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.4);
+        }
+        
+        .status.inactive {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.4);
+        }
+        
+        .alerts-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        
+        .alert-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            position: relative;
+        }
+        
+        .alert-item .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(220, 53, 69, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚗 Alertes Voitures</h1>
+    </div>
+    
+    <form id="alertForm">
+        <div class="form-group">
+            <label for="marque">Marque :</label>
+            <select id="marque">
+                <option value="">Toutes marques</option>
+                <option value="renault">Renault</option>
+                <option value="peugeot">Peugeot</option>
+                <option value="citroen">Citroën</option>
+                <option value="volkswagen">Volkswagen</option>
+                <option value="bmw">BMW</option>
+                <option value="audi">Audi</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="ford">Ford</option>
+                <option value="opel">Opel</option>
+                <option value="toyota">Toyota</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="modele">Modèle :</label>
+            <input type="text" id="modele" placeholder="Ex: Clio, 308, Golf...">
+        </div>
+        
+        <div class="price-group">
+            <div class="form-group">
+                <label for="prixMin">Prix min (€) :</label>
+                <input type="number" id="prixMin" placeholder="0">
+            </div>
+            <div class="form-group">
+                <label for="prixMax">Prix max (€) :</label>
+                <input type="number" id="prixMax" placeholder="50000">
+            </div>
+        </div>
+        
+        <div class="price-group">
+            <div class="form-group">
+                <label for="kmMin">Km min :</label>
+                <input type="number" id="kmMin" placeholder="0">
+            </div>
+            <div class="form-group">
+                <label for="kmMax">Km max :</label>
+                <input type="number" id="kmMax" placeholder="200000">
+            </div>
+        </div>
+        
+        <div class="price-group">
+            <div class="form-group">
+                <label for="anneeMin">Année min :</label>
+                <input type="number" id="anneeMin" placeholder="2000" min="1990" max="2025">
+            </div>
+            <div class="form-group">
+                <label for="anneeMax">Année max :</label>
+                <input type="number" id="anneeMax" placeholder="2025" min="1990" max="2025">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="localisation">Localisation :</label>
+            <input type="text" id="localisation" placeholder="Paris, Lyon, Marseille...">
+        </div>
+        
+        <div class="form-group">
+            <label for="rayon">Rayon (km) :</label>
+            <select id="rayon">
+                <option value="20">20 km</option>
+                <option value="50">50 km</option>
+                <option value="100" selected>100 km</option>
+                <option value="200">200 km</option>
+                <option value="500">500 km</option>
+            </select>
+        </div>
+        
+        <div class="checkbox-group">
+            <input type="checkbox" id="notificationSound">
+            <label for="notificationSound">Son de notification</label>
+        </div>
+        
+        <button type="submit" id="addAlert">Ajouter l'alerte</button>
+    </form>
+    
+    <div id="status" class="status inactive">
+        Surveillance inactive
+    </div>
+    
+    <div class="alerts-list" id="alertsList">
+        <!-- Les alertes seront ajoutées ici dynamiquement -->
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>

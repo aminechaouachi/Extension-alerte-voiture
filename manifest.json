@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "Alertes Voitures d'Occasion",
+  "version": "1.0",
+  "description": "Extension pour surveiller les nouvelles annonces de voitures d'occasion",
+  
+  "permissions": [
+    "storage",
+    "notifications",
+    "activeTab",
+    "alarms",
+    "tabs",
+    "scripting"
+  ],
+  
+  "host_permissions": [
+    "https://leboncoin.fr/*",
+    "https://www.leboncoin.fr/*",
+    "https://lacentrale.fr/*",
+    "https://www.lacentrale.fr/*",
+    "https://paruvendu.fr/*",
+    "https://www.paruvendu.fr/*",
+    "https://largus.fr/*",
+    "https://www.largus.fr/*"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "https://leboncoin.fr/*",
+        "https://www.leboncoin.fr/*",
+        "https://lacentrale.fr/*",
+        "https://www.lacentrale.fr/*",
+        "https://paruvendu.fr/*",
+        "https://www.paruvendu.fr/*",
+        "https://largus.fr/*",
+        "https://www.largus.fr/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Alertes Voitures d'Occasion"
+  }
+}
